@@ -1,0 +1,88 @@
+import bcrypt from 'bcryptjs';
+
+
+const data = {
+  users: [
+    {
+      name: 'Iqbal',
+      email: 'admin@gmail.com',
+      password: bcrypt.hashSync('1234', 8),
+      isAdmin: true,
+    },
+    {
+      name: 'Hanif',
+      email: 'user@gmail.com',
+      password: bcrypt.hashSync('1234', 8),
+      isAdmin: false,
+    },
+  ],
+    products: [
+      {
+        name: 'Fxxking Compass V1',
+        category: 'Sneakers',
+        image: '/images/p1.jpg',
+        price: 1000,
+        countInStock: 10,
+        brand: 'Compass',
+        rating: 4.5,
+        numReviews: 10,
+        description: 'Sepatu lokal hasil kolaborasi bersama FxxkingRabbit',
+      },
+      {
+        name: 'Vintage 98 Hi Grey',
+        category: 'Sneakers',
+        image: '/images/p2.jpg',
+        price: 400,
+        countInStock: 0,
+        brand: 'Compass',
+        rating: 4.0,
+        numReviews: 10,
+        description: 'Brand lokal',
+      },
+      {
+        name: 'Gazelle Hi Blue Sky',
+        category: 'Sneakers',
+        image: '/images/p3.jpg',
+        price: 300,
+        countInStock: 30,
+        brand: 'Compass',
+        rating: 4.8,
+        numReviews: 17,
+        description: 'Brand Lokal',
+      },
+      {
+        name: 'Air Jordan',
+        category: 'Sports',
+        image: '/images/p4.jpg',
+        price: 1500,
+        countInStock: 20,
+        brand: 'Nike',
+        rating: 4.5,
+        numReviews: 14,
+        description: 'Kualitas Terbaik',
+      },
+      {
+        name: 'Tubular',
+        category: 'Sports',
+        image: '/images/p5.jpg',
+        price: 650,
+        countInStock: 50,
+        brand: 'Adidas',
+        rating: 4.5,
+        numReviews: 10,
+        description: 'Kualitas Terbaik',
+      },
+      {
+        name: 'All Star',
+        category: 'Sneakers',
+        image: '/images/p6.jpg',
+        price: 600,
+        countInStock: 10,
+        brand: 'Converse',
+        rating: 4.5,
+        numReviews: 15,
+        description: 'Penjualan Terbanyak',
+      },
+    ],
+  };
+  export default data;
