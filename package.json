@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd frontend && npm install npm-run-all && npm run build",
+    "frontend": "cd frontend && npm save dev",
+    "backend": "cd backend && npm save dev",
     "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
   },
   "author": "",
