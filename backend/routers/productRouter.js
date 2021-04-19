@@ -148,14 +148,22 @@ productRouter.post(
   isAuth,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
-    Order.findOne({user: req.user._id});
     const product = await Product.findById(productId);
-    if (product) {
-      if (product.reviews.find((x) => x.name === req.user.name)) {
-        return res
-          .status(400)
-          .send({ message: 'You already submitted a review' });
-      }
+    
+  // if (product) {
+  //   const alreadyReviewed = product.reviews.find(
+  //     (r) => r.user.toString() === req.user._id.toString()
+  //   )
+ 
+  //   if (alreadyReviewed) {
+  //     return res.status(400).send({message:'Product already reviewed'})
+  //   }
+     if (product) {
+       if (product.reviews.find((x) => x.name === req.user.name)) {
+         return res
+           .status(400)
+           .send({ message: 'You already submitted a review' });
+       }
       const review = {
         name: req.user.name,
         rating: Number(req.body.rating),
