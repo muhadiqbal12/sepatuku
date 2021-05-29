@@ -37,9 +37,26 @@ export const createOrder = (order) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     });
+
+    console.log(data.order);
+
+
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
     dispatch({ type: CART_EMPTY });
     localStorage.removeItem('cartItems');
+
+    try {
+    const invoice = await Axios.post(
+      `https://invoice-skripsi2021.herokuapp.com/invoice`, 
+      {
+        tujuan: data.order.shippingAddress.fullName,
+        nominal: data.order.totalPrice,
+        order_id: data.order._id,
+    }
+    );
+} catch (error) {
+  console.log(error);
+}
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
@@ -82,6 +99,9 @@ export const payOrder = (order, paymentResult) => async (
     const { data } = Axios.put(`/api/orders/${order._id}/pay`, paymentResult, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
+
+    const paidInvoice = Axios.put(`https://invoice-skripsi2021.herokuapp.com/invoice/bayar/${order._id}`);
+
     dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -142,6 +162,9 @@ export const deleteOrder = (orderId) => async (dispatch, getState) => {
     const { data } = Axios.delete(`/api/orders/${orderId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
+
+    const deletedInvoice = Axios.delete(`https://invoice-skripsi2021.herokuapp.com/invoice/delete/${orderId}`);
+
     dispatch({ type: ORDER_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =
