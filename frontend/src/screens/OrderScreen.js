@@ -134,6 +134,8 @@ export default function OrderScreen(props) {
                           <Link to={`/product/${item.product}`}>
                             {item.name}
                           </Link>
+                          </div>
+                        <div> Size {item.size}
                         </div>
                         <div>
                         <strong>Item: </strong>

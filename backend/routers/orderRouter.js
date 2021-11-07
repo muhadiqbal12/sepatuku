@@ -90,6 +90,7 @@ orderRouter.post(
         shippingMethod: req.body.shippingMethod,
         paymentMethod: req.body.paymentMethod,
         weight: req.body.weight,
+        size: req.body.size,
         itemsPrice: req.body.itemsPrice,
         shippingPrice: req.body.shippingPrice,
         taxPrice: req.body.taxPrice,
@@ -132,7 +133,14 @@ orderRouter.put(
         email_address: req.body.email_address,
       };
       const updatedOrder = await order.save();
-      res.send({ message: 'Order Paid', order: updatedOrder });
+
+      for (const index in updatedOrder.orderItems) {         
+        const item = updatedOrder.orderItems[index];         
+        const product = await Product.findById(item.product);         
+        product.countInStock -= item.qty;         
+        product.sold += item.qty;               
+        await product.save();
+       } res.send({ message: 'Order Paid', order: updatedOrder });
     } else {
       res.status(404).send({ message: 'Order Not Found' });
     }

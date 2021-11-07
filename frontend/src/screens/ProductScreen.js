@@ -78,6 +78,7 @@ export default function ProductScreen(props) {
                   ></Rating>
                 </li>
                 <li>Price : ${product.price}</li>
+                <li>Size : {product.size}</li>
                 <li>Weight : {product.weight} kg</li>
                 <li>
                   Description:

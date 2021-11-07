@@ -90,6 +90,7 @@ productRouter.post(
       name: 'sample name ' + Date.now(),
       seller: req.user._id,
       image: '/images/p1.jpg',
+      size: 0,
       weight: 0,
       price: 0,
       category: 'sample category',
@@ -114,6 +115,7 @@ productRouter.put(
       product.name = req.body.name;
       product.price = req.body.price;
       product.image = req.body.image;
+      product.size = req.body.size;
       product.weight = req.body.weight;
       product.category = req.body.category;
       product.brand = req.body.brand;

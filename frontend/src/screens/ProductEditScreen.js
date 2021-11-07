@@ -12,6 +12,7 @@ export default function ProductEditScreen(props) {
   const [name, setName] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [size, setSize] = useState('');
   const [weight, setWeight] = useState('');
   const [category, setCategory] = useState('');
   const [countInStock, setCountInStock] = useState('');
@@ -39,6 +40,7 @@ export default function ProductEditScreen(props) {
       setName(product.name);
       setPrice(product.price);
       setImage(product.image);
+      setSize(product.Size);
       setWeight(product.weight);
       setCategory(product.category);
       setCountInStock(product.countInStock);
@@ -55,6 +57,7 @@ export default function ProductEditScreen(props) {
         name,
         price,
         image,
+        size,
         weight,
         category,
         brand,
@@ -129,6 +132,16 @@ export default function ProductEditScreen(props) {
                 placeholder="Enter image"
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
+              ></input>
+            </div>
+            <div>
+              <label htmlFor="size">Size</label>
+              <input
+                id="size"
+                type="text"
+                placeholder="Enter size"
+                value={size}
+                onChange={(e) => setSize(e.target.value)}
               ></input>
             </div>
             <div>

@@ -44,18 +44,31 @@ export const createOrder = (order) => async (dispatch, getState) => {
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
     dispatch({ type: CART_EMPTY });
     localStorage.removeItem('cartItems');
-
     try {
-    const invoice = await Axios.post(
-      `https://invoice-skripsi2021.herokuapp.com/invoice`, 
+      const {data} = await Axios.post(
+        '/api/products',
+      {},
+        {
+      }
+      );
+  } catch (error) {
+    Axios.delete(`/api/orders/${data.order._id}`, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+  });
+  
+  throw new Error("error post ke db heroku")
+  }
+    try {
+    const product = await Axios.post(
       {
-        tujuan: data.order.shippingAddress.fullName,
-        nominal: data.order.totalPrice,
-        order_id: data.order._id,
     }
     );
 } catch (error) {
-  console.log(error);
+  Axios.delete(`/api/orders/${data.order._id}`, {
+    headers: { Authorization: `Bearer ${userInfo.token}` },
+});
+
+throw new Error("error")
 }
   } catch (error) {
     dispatch({
